@@ -5,6 +5,16 @@ from .models import Planet, Character
 from .swapi import get_all_planets, get_all_characters
 
 
+def clear_data(request):
+    characters_deleted, _ = Character.objects.all().delete()
+    planets_deleted, _ = Planet.objects.all().delete()
+    return JsonResponse({
+        "status": "success",
+        "characters_deleted": characters_deleted,
+        "planets_deleted": planets_deleted,
+    })
+
+
 def sync_data(request):
     planets_created = 0
     characters_created = 0

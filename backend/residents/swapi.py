@@ -1,6 +1,8 @@
 import json
+import logging
 import urllib.request
 
+logger = logging.getLogger(__name__)
 BASE_API_URL = "https://swapi.dev/api"
 
 
@@ -16,7 +18,7 @@ def get_all_planets():
         planets_resp = fetch_json_request(next_page)
         next_page = planets_resp.get('next')
         for planet in planets_resp.get('results', []):
-            print(f'planet: {planet["name"]}')
+            logger.warning(f'planet: {planet["name"]}')
             yield planet
 
 
@@ -26,5 +28,5 @@ def get_all_characters():
         planets_resp = fetch_json_request(next_page)
         next_page = planets_resp.get('next')
         for planet in planets_resp.get('results', []):
-            print(f'planet: {planet["name"]}')
+            logger.warning(f'planet: {planet["name"]}')
             yield planet
